@@ -194,6 +194,21 @@ ul,ol{list-style:none}
 .form-label span{color:#D0021B}
 .form-input,.form-select{width:100%;padding:14px 15px;border:1.5px solid var(--line);border-radius:var(--radius);font-family:inherit;font-size:15px;color:var(--text);background:#fff;transition:border-color var(--tr);outline:none}
 .form-input:focus,.form-select:focus{border-color:var(--gold)}
+/* 방문예약 날짜/시간 */
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.form-row .form-group{margin-bottom:0}
+input[type=date].form-input{min-height:50px;-webkit-appearance:none;appearance:none;background:#fff}
+input[type=date].form-input::-webkit-calendar-picker-indicator{opacity:.55;cursor:pointer}
+input[type=date].form-input:invalid,input[type=date].form-input:not(:valid){color:var(--text-xs)}
+.visit-wrap{margin-bottom:16px}
+.visit-head{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:7px}
+.visit-head .form-label{margin:0}
+.visit-clear{font-size:11.5px;font-weight:600;color:var(--text-xs);text-decoration:underline;padding:2px 0}
+.visit-quick{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:9px}
+.visit-chip{padding:7px 13px;font-size:12px;font-weight:600;color:var(--text-s);background:#fff;border:1.5px solid var(--line);border-radius:20px;transition:all var(--tr)}
+.visit-chip.active{color:#fff;background:var(--main);border-color:var(--main)}
+.visit-note{font-size:11.5px;color:var(--text-xs);line-height:1.7;margin-top:7px}
+.visit-error{display:none;font-size:12px;color:#D0021B;margin-top:7px;font-weight:600}
 .form-select{appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%23999' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 14px center}
 .privacy-wrap{margin:6px 0 20px}
 .privacy-row{display:flex;align-items:flex-start;gap:9px;cursor:pointer;user-select:none}
@@ -325,6 +340,25 @@ ul,ol{list-style:none}
           <label class="form-label" for="unit_type">관심 타입</label>
           <select class="form-select" id="unit_type" name="unit_type"><option value="미선택">타입 선택</option></select>
         </div>
+        <div class="visit-wrap">
+          <div class="visit-head">
+            <label class="form-label" for="visit_date">방문예약 (견본주택 상담 희망일시)</label>
+            <button type="button" class="visit-clear" id="visitClear">선택 초기화</button>
+          </div>
+          <div class="visit-quick" id="visitQuick"></div>
+          <div class="form-row">
+            <div class="form-group">
+              <input class="form-input" type="date" id="visit_date" name="visit_date" aria-label="방문 희망 날짜">
+            </div>
+            <div class="form-group">
+              <select class="form-select" id="visit_time" name="visit_time" aria-label="방문 희망 시간">
+                <option value="">시간 선택</option>
+              </select>
+            </div>
+          </div>
+          <p class="visit-error" id="visitError">방문 희망 날짜와 시간을 함께 선택해 주세요.</p>
+          <p class="visit-note" id="visitNote"></p>
+        </div>
         <div class="privacy-wrap">
           <label class="privacy-row">
             <input type="checkbox" id="privacyAgree">
@@ -336,7 +370,7 @@ ul,ol{list-style:none}
           <div class="privacy-box" id="privacyBox">
             <strong>개인정보 수집·이용 안내</strong>
             <table>
-              <tr><th>수집 항목</th><td>성명, 연락처, 관심 타입</td></tr>
+              <tr><th>수집 항목</th><td>성명, 연락처, 관심 타입, 방문 희망일시</td></tr>
               <tr><th>수집 목적</th><td id="privacyPurpose"></td></tr>
               <tr><th>보유 기간</th><td>수집일로부터 1년 (목적 달성 또는 동의 철회 시 즉시 파기)</td></tr>
               <tr><th>제3자 제공</th><td>제공하지 않음</td></tr>
@@ -562,6 +596,78 @@ ul,ol{list-style:none}
   const unitSel = document.getElementById('unit_type');
   cfg.unitTypes.forEach(t=>{ const o=document.createElement('option'); o.value=o.textContent=t; unitSel.appendChild(o); });
 
+  /* =====================================================================
+     방문예약 — 날짜 / 시간 선택
+     · 오늘부터 60일 이내만 선택 가능
+     · 시간: cfg.visitHours(있으면) 또는 10:00~17:30 30분 단위
+     · 예약 미선택도 등록 가능(선택 항목) — 단, 날짜/시간 중 하나만 고르면 경고
+     ===================================================================== */
+  const visitDate = document.getElementById('visit_date'),
+        visitTime = document.getElementById('visit_time'),
+        visitQuick = document.getElementById('visitQuick'),
+        visitError = document.getElementById('visitError');
+  const DAY_KO = ['일','월','화','수','목','금','토'];
+  const ymd = d => `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`;
+
+  /* 선택 가능 기간 */
+  const today = new Date(); today.setHours(0,0,0,0);
+  const maxDay = new Date(today); maxDay.setDate(maxDay.getDate()+60);
+  visitDate.min = ymd(today);
+  visitDate.max = ymd(maxDay);
+
+  /* 시간 옵션 */
+  const slots = (cfg.visitHours && cfg.visitHours.length) ? cfg.visitHours : (()=>{
+    const list=[];
+    for(let m=10*60; m<=17*60+30; m+=30){
+      const h=Math.floor(m/60), mm=m%60;
+      const ampm = h<12?'오전':'오후', h12 = h>12?h-12:h;
+      list.push(`${ampm} ${h12}:${String(mm).padStart(2,'0')}`);
+    }
+    return list;
+  })();
+  slots.forEach(t=>{ const o=document.createElement('option'); o.value=o.textContent=t; visitTime.appendChild(o); });
+
+  /* 빠른 날짜 선택 칩 (오늘/내일/이번 주말 등 4개) */
+  const quickDays = [0,1,2,3].map(n=>{
+    const d = new Date(today); d.setDate(d.getDate()+n);
+    const label = n===0 ? '오늘' : n===1 ? '내일'
+      : `${d.getMonth()+1}/${d.getDate()}(${DAY_KO[d.getDay()]})`;
+    return {value: ymd(d), label};
+  });
+  visitQuick.innerHTML = quickDays.map(q=>
+    `<button type="button" class="visit-chip" data-date="${q.value}">${q.label}</button>`).join('');
+
+  function syncQuick(){
+    visitQuick.querySelectorAll('.visit-chip').forEach(b=>
+      b.classList.toggle('active', b.dataset.date === visitDate.value));
+  }
+  function visitNoteText(){
+    const note = document.getElementById('visitNote');
+    if(visitDate.value && visitTime.value){
+      const d = new Date(visitDate.value+'T00:00:00');
+      note.innerHTML = `선택하신 <strong>${d.getMonth()+1}월 ${d.getDate()}일(${DAY_KO[d.getDay()]}) ${visitTime.value}</strong> 방문 가능 여부를 담당자가 확인 후 연락드립니다.`;
+    }else{
+      note.textContent = `※ 방문예약은 선택 사항입니다. 상담 가능 시간 ${cfg.openHours}`;
+    }
+  }
+  const clearVisitError = ()=>{ visitError.style.display='none'; };
+  visitQuick.addEventListener('click', e=>{
+    const b = e.target.closest('.visit-chip'); if(!b) return;
+    visitDate.value = (visitDate.value === b.dataset.date) ? '' : b.dataset.date;
+    syncQuick(); visitNoteText(); clearVisitError();
+  });
+  visitDate.addEventListener('change', ()=>{
+    /* 과거 날짜 입력 방어 (수동 입력 시) */
+    if(visitDate.value && visitDate.value < visitDate.min) visitDate.value = visitDate.min;
+    if(visitDate.value && visitDate.value > visitDate.max) visitDate.value = visitDate.max;
+    syncQuick(); visitNoteText(); clearVisitError();
+  });
+  visitTime.addEventListener('change', ()=>{ visitNoteText(); clearVisitError(); });
+  document.getElementById('visitClear').addEventListener('click', ()=>{
+    visitDate.value=''; visitTime.value=''; syncQuick(); visitNoteText(); clearVisitError();
+  });
+  visitNoteText();
+
   /* ── Form / footer 텍스트 ── */
   document.getElementById('privacyPurpose').textContent = cfg.privacyPurpose;
   document.getElementById('successMsg').innerHTML =
@@ -668,6 +774,11 @@ ul,ol{list-style:none}
     const name=document.getElementById('from_name').value.trim();
     const phone=document.getElementById('phone').value.trim();
     if(!name||!phone){alert('성함과 연락처는 필수 입력 항목입니다.');return;}
+    /* 방문예약 — 날짜/시간 중 하나만 선택된 경우 안내 */
+    if((visitDate.value && !visitTime.value) || (!visitDate.value && visitTime.value)){
+      visitError.style.display='block';
+      visitError.scrollIntoView({behavior:'smooth',block:'center'}); return;
+    }
     if(!document.getElementById('privacyAgree').checked){
       const er=document.getElementById('privacyError'); er.style.display='block';
       er.scrollIntoView({behavior:'smooth',block:'center'}); return;
@@ -675,9 +786,20 @@ ul,ol{list-style:none}
     submitBtn.disabled=true; submitBtn.textContent='전송 중...';
     try{
       const res=await fetch('/api/contact',{method:'POST',headers:{'Content-Type':'application/json'},
-        body:JSON.stringify({from_name:name,phone,unit_type:document.getElementById('unit_type').value})});
+        body:JSON.stringify({
+          from_name:name, phone,
+          unit_type:document.getElementById('unit_type').value,
+          visit_date:visitDate.value, visit_time:visitTime.value
+        })});
       const data=await res.json();
-      if(data.success){ formBox.style.display='none'; formSuccess.style.display='block';
+      if(data.success){
+        if(visitDate.value && visitTime.value){
+          const d=new Date(visitDate.value+'T00:00:00');
+          document.getElementById('successMsg').innerHTML =
+            `방문 희망일시 <strong>${d.getMonth()+1}월 ${d.getDate()}일(${DAY_KO[d.getDay()]}) ${visitTime.value}</strong><br>` +
+            `예약 확정 여부는 담당자가 확인 후 연락드립니다.<br>추가 문의는 <strong>${cfg.callPhone}</strong>으로 연락 주세요.`;
+        }
+        formBox.style.display='none'; formSuccess.style.display='block';
         formSuccess.scrollIntoView({behavior:'smooth',block:'center'}); }
       else throw new Error(data.error||'전송 실패');
     }catch(err){
