@@ -1,0 +1,691 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="format-detection" content="telephone=no">
+
+<!-- ===== SEO (config.js에서 동적 보강) ===== -->
+<title>부산 장안지구 중흥S-클래스 | 공식 관심고객등록</title>
+<meta name="description" content="부산 장안지구 중흥S-클래스 공식 홍보 페이지. 기장군 장안읍 좌동리 일원, 총 514세대, 59㎡A·B / 84㎡A·B. 선시공 후분양, 분양가 상한제 적용. 관심고객등록 시 최신 분양정보를 우선 안내드립니다.">
+<meta name="keywords" content="부산 장안지구 중흥S-클래스, 장안지구 아파트, 기장군 분양, 좌천역 아파트, 중흥S클래스, 부산 분양">
+<meta name="author" content="중흥토건(주)">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="" id="seo-canonical">
+
+<!-- Open Graph -->
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="부산 장안지구 중흥S-클래스">
+<meta property="og:title" content="부산 장안지구 중흥S-클래스" id="og-title">
+<meta property="og:description" content="총 514세대, 59㎡A·B / 84㎡A·B. 관심고객등록 시 최신 분양정보 우선 안내." id="og-desc">
+<meta property="og:image" content="assets/images/visual1.jpg" id="og-image">
+<meta property="og:locale" content="ko_KR">
+<!-- Twitter -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="부산 장안지구 중흥S-클래스" id="tw-title">
+<meta name="twitter:description" content="총 514세대. 관심고객등록 우선 안내." id="tw-desc">
+<meta name="twitter:image" content="assets/images/visual1.jpg" id="tw-image">
+
+<meta name="theme-color" content="#17301F">
+<link rel="icon" href="assets/images/bi.png">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+
+<!-- JSON-LD 구조화 데이터 -->
+<script type="application/ld+json" id="ld-json"></script>
+
+<style>
+/* ===== DESIGN TOKENS ===== */
+:root{
+  --main:      #17301F;  /* 딥 그린 */
+  --main-d:    #0E2115;
+  --main-l:    #2A4E36;
+  --gold:      #C2A25E;
+  --gold-l:    #DCC38C;
+  --gold-d:    #94793F;
+  --olive:     #6D8209;
+  --cream:     #F4F2EA;
+  --gray:      #F4F5F3;
+  --line:      #E4E2D8;
+  --text:      #333;
+  --text-s:    #666;
+  --text-xs:   #9A9A9A;
+  --radius:    6px;
+  --tr:        .3s cubic-bezier(.4,0,.2,1);
+  --maxw:      680px; /* 모바일 우선 컨텐츠 폭 */
+  --hh:        58px;  /* 고정 헤더 높이 — JS가 실측값으로 갱신 */
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+/* scroll-behavior는 JS가 직접 제어합니다(앵커 위치 보정) */
+html{-webkit-text-size-adjust:100%;overflow-x:hidden;width:100%}
+body{font-family:'Noto Sans KR',sans-serif;color:var(--text);background:#fff;overflow-x:hidden;width:100%;line-height:1.6}
+/* width/height 속성으로 미리 자리를 예약 → 이미지 로딩 중 레이아웃이 밀리지 않음 */
+img{max-width:100%;height:auto;display:block}
+/* 고정 헤더 높이만큼 앵커 오프셋 */
+section[id]{scroll-margin-top:calc(var(--hh) + 8px)}
+a{text-decoration:none;color:inherit}
+button{cursor:pointer;border:none;background:none;font-family:inherit}
+ul,ol{list-style:none}
+
+/* ── Loading ── */
+#page-loading{position:fixed;inset:0;background:var(--main);z-index:9999;display:flex;align-items:center;justify-content:center;transition:opacity .4s}
+#page-loading.hide{opacity:0;pointer-events:none}
+.loading-dot{width:9px;height:9px;background:var(--gold);border-radius:50%;margin:0 4px;animation:ldot 1s infinite alternate}
+.loading-dot:nth-child(2){animation-delay:.2s}
+.loading-dot:nth-child(3){animation-delay:.4s}
+@keyframes ldot{from{opacity:.25;transform:scale(.8)}to{opacity:1;transform:scale(1.2)}}
+
+/* ── Header ── */
+.header{position:fixed;top:0;left:0;right:0;z-index:900;background:rgba(23,48,31,.96);backdrop-filter:blur(10px);transition:var(--tr);border-bottom:1px solid rgba(255,255,255,.08)}
+.header-inner{display:flex;align-items:center;justify-content:space-between;height:58px;padding:0 18px;max-width:1160px;margin:0 auto}
+.logo{display:flex;align-items:center;gap:9px}
+.logo img{height:22px;width:auto}
+.logo-txt{display:flex;flex-direction:column;line-height:1.15}
+.logo-ko{font-size:13px;font-weight:900;letter-spacing:.5px;color:#fff;white-space:nowrap}
+.logo-en{font-size:8px;letter-spacing:1.6px;color:var(--gold-l);font-weight:500}
+.gnav{display:none;gap:20px;align-items:center}
+.gnav a{font-size:13px;font-weight:500;color:rgba(255,255,255,.8);letter-spacing:.3px;position:relative;padding-bottom:3px;white-space:nowrap}
+.gnav a::after{content:'';position:absolute;bottom:0;left:0;width:0;height:1.5px;background:var(--gold);transition:width .25s}
+.gnav a:hover{color:#fff}.gnav a:hover::after{width:100%}
+.gnav-cta{background:var(--gold);color:var(--main)!important;padding:8px 16px;border-radius:var(--radius);font-weight:700!important}
+.gnav-cta::after{display:none!important}
+.mobile-menu-btn{display:flex;flex-direction:column;gap:5px;padding:6px}
+.mobile-menu-btn span{width:22px;height:2px;background:#fff;border-radius:2px;transition:var(--tr)}
+
+/* ── Mobile Nav ── */
+.mobile-nav{position:fixed;top:0;right:-100%;width:270px;max-width:80vw;height:100dvh;background:var(--main);z-index:910;padding:72px 26px 40px;box-shadow:-4px 0 30px rgba(0,0,0,.4);transition:right .35s ease;overflow-y:auto}
+.mobile-nav.open{right:0}
+.mobile-nav-close{position:absolute;top:18px;right:18px;font-size:24px;color:rgba(255,255,255,.7)}
+.mobile-nav a{display:block;padding:15px 0;font-size:15px;font-weight:500;color:rgba(255,255,255,.85);border-bottom:1px solid rgba(255,255,255,.08)}
+.mobile-nav a.cta{margin-top:16px;background:var(--gold);color:var(--main);text-align:center;padding:14px;border-radius:var(--radius);font-weight:700;border:none}
+.mobile-nav a.tel{margin-top:10px;background:transparent;color:#fff;text-align:center;padding:13px;border:1px solid rgba(255,255,255,.35);border-radius:var(--radius);font-weight:700}
+.nav-overlay{position:fixed;inset:0;background:rgba(0,0,0,.5);z-index:905;opacity:0;pointer-events:none;transition:opacity .3s}
+.nav-overlay.show{opacity:1;pointer-events:auto}
+
+/* ── Hero ── */
+.hero{position:relative;min-height:88vh;display:flex;align-items:center;justify-content:center;overflow:hidden;background:var(--main);padding-top:58px}
+.hero-bg{position:absolute;inset:0;background-size:cover;background-position:center;opacity:.6;animation:heroZoom 16s ease-in-out infinite alternate}
+@keyframes heroZoom{from{transform:scale(1.08)}to{transform:scale(1)}}
+.hero-overlay{position:absolute;inset:0;background:linear-gradient(to bottom,rgba(14,33,21,.6) 0%,rgba(14,33,21,.28) 45%,rgba(14,33,21,.88) 100%)}
+.hero-content{position:relative;z-index:2;text-align:center;padding:0 22px;color:#fff}
+.hero-badge{display:inline-flex;align-items:center;gap:8px;background:rgba(194,162,94,.16);border:1px solid rgba(220,195,140,.5);border-radius:30px;padding:8px 20px;font-size:12px;letter-spacing:1px;color:var(--gold-l);font-weight:600;margin-bottom:26px;opacity:0;animation:fadeUp .8s .2s forwards}
+.hero-badge-dot{width:6px;height:6px;background:var(--gold);border-radius:50%;animation:pulse 2s infinite}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.35}}
+.hero-eyebrow{display:block;font-size:10px;letter-spacing:4px;color:rgba(255,255,255,.6);margin-bottom:16px;opacity:0;animation:fadeUp .8s .4s forwards}
+.hero-title{font-size:clamp(28px,8vw,50px);font-weight:900;line-height:1.2;letter-spacing:-1px;margin-bottom:14px;opacity:0;animation:fadeUp .8s .6s forwards}
+.hero-title b{color:var(--gold-l)}
+.hero-sub{font-size:clamp(13px,3.6vw,17px);color:rgba(255,255,255,.78);letter-spacing:.5px;line-height:1.7;margin-bottom:20px;opacity:0;animation:fadeUp .8s .8s forwards}
+.hero-info{font-size:12px;color:rgba(255,255,255,.55);letter-spacing:.5px;margin-bottom:34px;opacity:0;animation:fadeUp .8s .9s forwards}
+.hero-info b{color:#fff}
+.hero-cta-row{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;opacity:0;animation:fadeUp .8s 1s forwards}
+.hero-btn{padding:14px 30px;border-radius:var(--radius);font-size:14px;font-weight:700;letter-spacing:.5px;transition:all var(--tr)}
+.hero-btn-primary{background:var(--gold);color:var(--main);border:2px solid var(--gold)}
+.hero-btn-primary:active{transform:translateY(1px)}
+.hero-btn-outline{background:transparent;color:#fff;border:2px solid rgba(255,255,255,.45)}
+@keyframes fadeUp{from{opacity:0;transform:translateY(22px)}to{opacity:1;transform:translateY(0)}}
+.hero-scroll{position:absolute;bottom:24px;left:0;right:0;display:flex;flex-direction:column;align-items:center;gap:8px;z-index:2;opacity:0;animation:fadeUp .8s 1.4s forwards}
+.hero-scroll-line{width:1px;height:44px;background:linear-gradient(to bottom,rgba(255,255,255,.6),transparent);animation:scrollAnim 2.4s ease-in-out infinite}
+@keyframes scrollAnim{0%{transform:scaleY(0);transform-origin:top}49%{transform:scaleY(1);transform-origin:top}50%{transform:scaleY(1);transform-origin:bottom}100%{transform:scaleY(0);transform-origin:bottom}}
+.hero-scroll-txt{font-size:9px;letter-spacing:3px;color:rgba(255,255,255,.4)}
+
+/* ── Notice bar ── */
+.notice-bar{background:var(--main-d);color:#fff;padding:14px 20px;text-align:center;font-size:13px;letter-spacing:.3px;line-height:1.9}
+.notice-bar strong{color:var(--gold-l);font-weight:700}
+
+/* ── Section base ── */
+.sec{padding:60px 0}
+.container{max-width:var(--maxw);margin:0 auto;padding:0 18px}
+.sec-head{text-align:center;margin-bottom:34px}
+.sec-eyebrow{display:inline-block;font-size:11px;letter-spacing:4px;color:var(--gold-d);font-weight:700;margin-bottom:10px}
+.sec-title{font-size:clamp(24px,6.5vw,34px);font-weight:900;color:var(--main);line-height:1.3;position:relative;display:inline-block;padding-bottom:14px}
+.sec-title::after{content:'';position:absolute;bottom:0;left:50%;transform:translateX(-50%);width:44px;height:3px;background:var(--gold)}
+.sec-desc{font-size:14px;color:var(--text-s);line-height:1.9;margin-top:16px;padding:0 6px;word-break:keep-all}
+.sec-tit-img{max-width:400px;margin:0 auto 20px;border-radius:var(--radius)}
+.sec-img{width:100%;border-radius:var(--radius);margin-top:16px;box-shadow:0 10px 30px rgba(23,48,31,.12)}
+.sec.alt{background:var(--gray)}
+
+/* 확대 가능한 이미지(지도/평면도) */
+.zoomable{cursor:zoom-in}
+.zoom-hint{text-align:center;font-size:11px;color:var(--text-xs);margin-top:8px;letter-spacing:.3px}
+
+/* ── Feature cards ── */
+.card-grid{display:grid;grid-template-columns:1fr;gap:16px;margin-top:24px}
+.f-card{background:#fff;border:1px solid var(--line);border-radius:10px;overflow:hidden;box-shadow:0 6px 20px rgba(23,48,31,.07)}
+.f-card img{width:100%;aspect-ratio:400/220;object-fit:cover}
+.f-card-body{padding:16px 18px 18px}
+.f-card-no{display:inline-block;font-size:10px;font-weight:900;letter-spacing:2px;color:#fff;background:var(--main);padding:3px 10px;border-radius:12px;margin-bottom:8px}
+.f-card-title{font-size:16px;font-weight:900;color:var(--main);line-height:1.35;margin-bottom:7px;padding-left:11px;position:relative;word-break:keep-all}
+.f-card-title::before{content:'';position:absolute;left:0;top:4px;bottom:4px;width:4px;background:var(--olive);border-radius:2px}
+.f-card-desc{font-size:13px;color:var(--text-s);line-height:1.75;word-break:keep-all}
+
+/* ── Community gallery ── */
+.gal-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin-top:18px}
+.gal-grid img{width:100%;aspect-ratio:400/280;object-fit:cover;border-radius:8px}
+
+/* ── Tabs (평면/인테리어) ── */
+.plan-tabs{display:flex;gap:6px;justify-content:center;flex-wrap:wrap;margin-bottom:22px}
+.plan-tab{padding:9px 18px;font-size:13px;font-weight:700;color:var(--text-s);background:#fff;border:1.5px solid var(--line);border-radius:22px;transition:all var(--tr)}
+.plan-tab.active{color:#fff;background:var(--main);border-color:var(--main)}
+.plan-panel{display:none}
+.plan-panel.active{display:block;animation:fadeUp .5s ease}
+
+/* ── Tables ── */
+.info-table{width:100%;border-collapse:collapse;margin-top:22px;background:#fff;border-radius:var(--radius);overflow:hidden;box-shadow:0 6px 20px rgba(23,48,31,.08)}
+.info-table tr{border-bottom:1px solid var(--line)}
+.info-table tr:last-child{border-bottom:none}
+.info-table th{padding:14px 12px;font-size:12px;font-weight:700;color:var(--main);background:var(--cream);width:104px;text-align:left;vertical-align:middle;white-space:nowrap}
+.info-table td{padding:14px 14px;font-size:13px;color:var(--text);line-height:1.7}
+.info-table td strong{color:var(--gold-d)}
+.area-table{margin-top:14px}
+.area-table th{width:120px}
+
+/* ── Notes ── */
+.notes{margin-top:20px;padding-top:16px;border-top:1px solid var(--line)}
+.notes li{font-size:11px;color:var(--text-xs);line-height:1.8;padding-left:11px;position:relative;word-break:keep-all}
+.notes li::before{content:'※';position:absolute;left:0;top:0}
+
+/* ── Form ── */
+.form-section{background:var(--cream);padding:56px 0 64px}
+.form-box{background:#fff;border-radius:12px;padding:30px 22px;box-shadow:0 12px 40px rgba(23,48,31,.12);max-width:560px;margin:0 auto}
+.form-group{display:flex;flex-direction:column;gap:7px;margin-bottom:16px}
+.form-label{font-size:13px;font-weight:700;color:var(--main)}
+.form-label span{color:#D0021B}
+.form-input,.form-select{width:100%;padding:14px 15px;border:1.5px solid var(--line);border-radius:var(--radius);font-family:inherit;font-size:15px;color:var(--text);background:#fff;transition:border-color var(--tr);outline:none}
+.form-input:focus,.form-select:focus{border-color:var(--gold)}
+.form-select{appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%23999' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 14px center}
+.privacy-wrap{margin:6px 0 20px}
+.privacy-row{display:flex;align-items:flex-start;gap:9px;cursor:pointer;user-select:none}
+.privacy-row input{width:18px;height:18px;flex-shrink:0;margin-top:1px;accent-color:var(--gold-d);cursor:pointer}
+.privacy-label{font-size:13px;color:var(--text);line-height:1.5}
+.privacy-label strong{color:#D0021B}
+.privacy-toggle{color:var(--gold-d);font-size:12px;font-weight:600;text-decoration:underline;margin-left:4px;white-space:nowrap}
+.privacy-box{display:none;margin-top:12px;padding:14px 16px;background:var(--gray);border:1px solid var(--line);border-radius:var(--radius);font-size:12px;color:var(--text-s);line-height:1.9}
+.privacy-box.open{display:block}
+.privacy-box table{width:100%;border-collapse:collapse;margin-top:8px}
+.privacy-box th,.privacy-box td{padding:6px 9px;border:1px solid var(--line);font-size:11px;text-align:left;vertical-align:top}
+.privacy-box th{background:#EDEBE1;font-weight:700;color:var(--text);white-space:nowrap;width:88px}
+.privacy-error{display:none;font-size:12px;color:#D0021B;margin-top:7px;font-weight:600}
+.form-submit{width:100%;padding:16px;background:var(--main);color:#fff;border-radius:var(--radius);font-size:16px;font-weight:700;letter-spacing:1px;transition:all var(--tr)}
+.form-submit:active{transform:translateY(1px)}
+.form-notice{text-align:center;margin-top:14px;font-size:11px;color:var(--text-xs);line-height:1.7}
+.form-success{display:none;text-align:center;padding:40px 20px;max-width:560px;margin:0 auto}
+.form-success-icon{font-size:52px;margin-bottom:14px}
+.form-success h3{font-size:21px;font-weight:900;color:var(--main);margin-bottom:12px}
+.form-success p{font-size:14px;color:var(--text-s);line-height:1.8}
+
+/* ── Footer ── */
+.footer{background:var(--main-d);color:rgba(255,255,255,.45);padding:40px 0 100px}
+.footer-inner{max-width:var(--maxw);margin:0 auto;padding:0 20px}
+.footer-logo{font-size:15px;font-weight:900;letter-spacing:1px;color:#fff;margin-bottom:14px}
+.footer-info{font-size:12px;line-height:2;color:rgba(255,255,255,.55)}
+.footer-info b{color:rgba(255,255,255,.8)}
+.footer-disclaimer{font-size:10.5px;line-height:1.8;margin:20px 0;color:rgba(255,255,255,.3);border-top:1px solid rgba(255,255,255,.08);padding-top:18px}
+.footer-copy{font-size:11px;color:rgba(255,255,255,.35)}
+
+/* ── Fixed bottom CTA (모바일) ── */
+.cta-bar{position:fixed;bottom:0;left:0;right:0;z-index:800;display:grid;grid-template-columns:1fr 1fr;height:calc(60px + env(safe-area-inset-bottom));box-shadow:0 -4px 20px rgba(0,0,0,.15)}
+.cta-btn{display:flex;align-items:center;justify-content:center;gap:8px;font-size:15px;font-weight:700;letter-spacing:.3px;padding-bottom:env(safe-area-inset-bottom)}
+.cta-btn svg{width:19px;height:19px;fill:currentColor}
+.cta-register{background:var(--gold);color:var(--main)}
+.cta-tel{background:var(--main);color:#fff}
+
+/* ── Lightbox ── */
+.lb{position:fixed;inset:0;background:rgba(0,0,0,.92);z-index:9500;display:none;align-items:center;justify-content:center;padding:16px}
+.lb.open{display:flex}
+.lb img{max-width:100%;max-height:100%;object-fit:contain;border-radius:4px}
+.lb-close{position:absolute;top:14px;right:16px;font-size:30px;color:#fff;line-height:1}
+
+/* ── Scroll fade ── */
+.fade-in{opacity:0;transform:translateY(26px);transition:opacity .7s ease,transform .7s ease}
+.fade-in.visible{opacity:1;transform:none}
+
+/* ── Desktop up ── */
+@media(min-width:900px){
+  .gnav{display:flex}
+  .mobile-menu-btn{display:none}
+  .card-grid{grid-template-columns:repeat(2,1fr)}
+  .gal-grid{grid-template-columns:repeat(3,1fr)}
+  .cta-bar{display:none}
+  .footer{padding-bottom:40px}
+  :root{--maxw:920px}
+}
+</style>
+</head>
+<body>
+
+<div id="page-loading"><div class="loading-dot"></div><div class="loading-dot"></div><div class="loading-dot"></div></div>
+
+<!-- HEADER -->
+<header class="header" id="header">
+  <div class="header-inner">
+    <a href="#hero" class="logo" aria-label="홈">
+      <img src="assets/images/bi.png" alt="중흥S-클래스 심볼" width="80" height="80">
+      <span class="logo-txt">
+        <span class="logo-ko" id="logoKo"></span>
+        <span class="logo-en">JUNGHEUNG S-CLASS</span>
+      </span>
+    </a>
+    <nav class="gnav" id="gnav" aria-label="주 메뉴"></nav>
+    <button class="mobile-menu-btn" id="menuBtn" aria-label="메뉴 열기"><span></span><span></span><span></span></button>
+  </div>
+</header>
+
+<!-- MOBILE NAV -->
+<nav class="mobile-nav" id="mobileNav" aria-label="모바일 메뉴">
+  <button class="mobile-nav-close" id="navClose" aria-label="메뉴 닫기">✕</button>
+  <div id="mobileNavLinks"></div>
+</nav>
+<div class="nav-overlay" id="navOverlay"></div>
+
+<!-- HERO -->
+<section class="hero" id="hero">
+  <div class="hero-bg" id="heroBg"></div>
+  <div class="hero-overlay"></div>
+  <div class="hero-content">
+    <div class="hero-badge"><span class="hero-badge-dot"></span><span id="heroBadge"></span></div>
+    <span class="hero-eyebrow" id="heroBrand"></span>
+    <h1 class="hero-title" id="heroTitle"></h1>
+    <p class="hero-sub" id="heroSub"></p>
+    <p class="hero-info" id="heroInfo"></p>
+    <div class="hero-cta-row">
+      <a href="#register" class="hero-btn hero-btn-primary">관심고객등록</a>
+      <a href="#overview" class="hero-btn hero-btn-outline">사업소개</a>
+    </div>
+  </div>
+  <div class="hero-scroll"><div class="hero-scroll-line"></div><span class="hero-scroll-txt">SCROLL</span></div>
+</section>
+
+<!-- NOTICE -->
+<div class="notice-bar" id="noticeBar"></div>
+
+<!-- SECTIONS (config에서 렌더링) -->
+<main id="sections"></main>
+
+<!-- INTEREST FORM -->
+<section class="form-section" id="register">
+  <div class="container">
+    <div class="sec-head fade-in">
+      <span class="sec-eyebrow">INTEREST REGISTRATION</span>
+      <h2 class="sec-title">관심고객등록</h2>
+      <p class="sec-desc" style="margin-top:14px">등록하신 고객님께 사전 혜택 및 최신 분양정보를 <strong>가장 먼저</strong> 안내해 드립니다.</p>
+    </div>
+    <div class="form-box fade-in" id="formBox">
+      <form id="contactForm" novalidate>
+        <div class="form-group">
+          <label class="form-label" for="from_name">성함 <span>*</span></label>
+          <input class="form-input" type="text" id="from_name" name="from_name" placeholder="홍길동" autocomplete="name" required>
+        </div>
+        <div class="form-group">
+          <label class="form-label" for="phone">연락처 <span>*</span></label>
+          <input class="form-input" type="tel" id="phone" name="phone" placeholder="010-0000-0000" autocomplete="tel" inputmode="numeric" required>
+        </div>
+        <div class="form-group">
+          <label class="form-label" for="unit_type">관심 타입</label>
+          <select class="form-select" id="unit_type" name="unit_type"><option value="미선택">타입 선택</option></select>
+        </div>
+        <div class="privacy-wrap">
+          <label class="privacy-row">
+            <input type="checkbox" id="privacyAgree">
+            <span class="privacy-label"><strong>[필수]</strong> 개인정보 수집·이용에 동의합니다.
+              <button type="button" class="privacy-toggle" id="privacyToggle">내용보기 ▾</button>
+            </span>
+          </label>
+          <p class="privacy-error" id="privacyError">개인정보 수집·이용에 동의해 주세요.</p>
+          <div class="privacy-box" id="privacyBox">
+            <strong>개인정보 수집·이용 안내</strong>
+            <table>
+              <tr><th>수집 항목</th><td>성명, 연락처, 관심 타입</td></tr>
+              <tr><th>수집 목적</th><td id="privacyPurpose"></td></tr>
+              <tr><th>보유 기간</th><td>수집일로부터 1년 (목적 달성 또는 동의 철회 시 즉시 파기)</td></tr>
+              <tr><th>제3자 제공</th><td>제공하지 않음</td></tr>
+            </table>
+            <p style="margin-top:9px;color:#999">※ 동의를 거부할 권리가 있으나, 거부 시 상담 서비스 제공이 제한됩니다.</p>
+          </div>
+        </div>
+        <button type="submit" class="form-submit" id="submitBtn">관심고객 등록하기</button>
+        <p class="form-notice">수집된 개인정보는 분양 상담 안내 목적으로만 사용되며 관련 법령에 따라 보호됩니다.</p>
+      </form>
+    </div>
+    <div class="form-success" id="formSuccess">
+      <div class="form-success-icon">✅</div>
+      <h3>관심고객등록이 완료되었습니다!</h3>
+      <p id="successMsg"></p>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="footer-inner">
+    <div class="footer-logo" id="footerLogo"></div>
+    <div class="footer-info" id="footerInfo"></div>
+    <p class="footer-disclaimer" id="footerDisclaimer"></p>
+    <p class="footer-copy" id="footerCopy"></p>
+  </div>
+</footer>
+
+<!-- FIXED BOTTOM CTA (모바일 전용) -->
+<div class="cta-bar" role="navigation" aria-label="빠른 연락">
+  <a href="#register" class="cta-btn cta-register" id="ctaRegister">
+    <svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8l-6-6zm2 16H8v-2h8v2zm0-4H8v-2h8v2zm-3-5V3.5L18.5 9H13z"/></svg>
+    관심고객등록
+  </a>
+  <a href="#" class="cta-btn cta-tel" id="ctaTel">
+    <svg viewBox="0 0 24 24"><path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/></svg>
+    전화걸기
+  </a>
+</div>
+
+<!-- LIGHTBOX -->
+<div class="lb" id="lightbox"><button class="lb-close" id="lbClose" aria-label="닫기">✕</button><img id="lbImg" alt=""></div>
+
+<script src="config.js"></script>
+<script>
+(function(){
+  const cfg = SITE_CONFIG;
+  const telNum = cfg.callPhone.replace(/-/g,'');
+
+  /* =====================================================================
+     이미지 원본 크기표 — <img>에 width/height를 넣어 자리를 미리 예약한다.
+     (넣지 않으면 로딩 전 높이가 0이었다가 로딩 후 수천 px 늘어나면서
+      PC에서 앵커 이동 위치가 크게 어긋난다)
+     새 이미지를 추가하면 여기에 [가로, 세로]도 함께 등록하세요.
+     ===================================================================== */
+  const IMG_SIZE = {
+    'visual1.jpg':      [1920, 1080],
+    'visual2.jpg':      [1920, 1080],
+    'logo.png':         [369, 38],
+    'bi.png':           [80, 80],
+    'overview.jpg':     [1200, 660],
+    'location_1.jpg':   [2090, 1239],
+    'location_3.jpg':   [600, 350],
+    'location_4.jpg':   [600, 350],
+    'location_5.jpg':   [600, 350],
+    'location_6.jpg':   [600, 350],
+    'premium_tit.jpg':  [530, 158],
+    'premium_1.jpg':    [400, 220], 'premium_2.jpg': [400, 220], 'premium_3.jpg': [400, 220],
+    'premium_4.jpg':    [400, 220], 'premium_5.jpg': [400, 220], 'premium_6.jpg': [400, 220],
+    'premium_7.jpg':    [400, 220],
+    'community_tit.jpg':[700, 131],
+    'community_1.jpg':  [1200, 1728],
+    'community_2.jpg':  [400, 280], 'community_3.jpg': [400, 280], 'community_4.jpg': [400, 280],
+    'plan1_1.jpg':[1200, 300], 'plan1_2.jpg':[1200, 581],
+    'plan2_1.jpg':[1200, 300], 'plan2_2.jpg':[1200, 630],
+    'plan3_1.jpg':[1200, 300], 'plan3_2.jpg':[1200, 630],
+    'plan4_1.jpg':[1200, 300], 'plan4_2.jpg':[1200, 630],
+    'interior_59a.jpg':[1200, 3470],
+    'interior_84a.jpg':[1200, 3470]
+  };
+  function imgTag(src, cls, alt, zoom){
+    const size = IMG_SIZE[String(src).split('/').pop()];
+    const dim = size ? ` width="${size[0]}" height="${size[1]}"` : '';
+    const z = zoom ? ' data-zoom="1"' : '';
+    return `<img src="${src}"${dim} alt="${alt}" class="${cls}${zoom?' zoomable':''}"${z} loading="lazy" decoding="async">`;
+  }
+  const esc = s => String(s==null?'':s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+
+  /* ── SEO 동적 보강 ── */
+  if(cfg.seo){
+    document.title = cfg.seo.title;
+    document.querySelector('meta[name=description]').content = cfg.seo.description;
+    document.querySelector('meta[name=keywords]').content = cfg.seo.keywords;
+    if(cfg.seo.canonical) document.getElementById('seo-canonical').href = cfg.seo.canonical;
+    document.getElementById('og-title').content = cfg.seo.title;
+    document.getElementById('tw-title').content = cfg.seo.title;
+    document.getElementById('og-desc').content = cfg.seo.description;
+    document.getElementById('tw-desc').content = cfg.seo.description;
+  }
+  document.getElementById('ld-json').textContent = JSON.stringify({
+    "@context":"https://schema.org","@type":"Residence",
+    "name":cfg.siteName,"description":cfg.seo?cfg.seo.description:"",
+    "address":{"@type":"PostalAddress","addressRegion":"부산광역시","addressLocality":"기장군 장안읍","streetAddress":cfg.address},
+    "telephone":cfg.callPhone,"numberOfRooms":cfg.totalUnits
+  });
+
+  /* ── Header / Nav ── */
+  document.getElementById('logoKo').textContent = '장안지구 중흥S-클래스';
+  document.getElementById('gnav').innerHTML =
+    cfg.nav.map(n=>`<a href="${n.href}">${n.label}</a>`).join('') +
+    `<a href="#register" class="gnav-cta">관심등록</a>`;
+  document.getElementById('mobileNavLinks').innerHTML =
+    cfg.nav.map(n=>`<a href="${n.href}" class="m-link">${n.label}</a>`).join('') +
+    `<a href="#register" class="m-link cta">관심고객등록</a>` +
+    `<a href="tel:${telNum}" class="m-link tel">전화상담 ${cfg.callPhone}</a>`;
+
+  /* ── Hero ── */
+  document.getElementById('heroBg').style.backgroundImage = `url('${cfg.heroImage}')`;
+  document.getElementById('heroBadge').textContent = cfg.heroBadge;
+  document.getElementById('heroBrand').textContent = cfg.brandEN;
+  document.getElementById('heroTitle').innerHTML = '부산 장안지구<br><b>중흥S-클래스</b>';
+  document.getElementById('heroSub').textContent = cfg.tagline;
+  document.getElementById('heroInfo').innerHTML =
+    `부산 기장군 장안읍 · <b>총 ${cfg.totalUnits}세대</b> · ${cfg.unitTypes.join(' / ')}`;
+
+  /* ── Notice ── */
+  document.getElementById('noticeBar').innerHTML =
+    `견본주택 방문 상담 예약·문의 <strong>${cfg.callPhone}</strong> · ${cfg.openHours}`;
+
+  /* ── Sections ── */
+  const sec = document.getElementById('sections');
+  sec.innerHTML = cfg.sections.map((s,i)=>{
+    const tit = s.tit ? imgTag(s.tit, 'sec-tit-img fade-in', `${s.ko} 타이틀`) : '';
+
+    /* 사업개요 표 */
+    let table = '';
+    if(s.table && cfg.overviewTable){
+      table = `<table class="info-table fade-in"><tbody>` +
+        cfg.overviewTable.map(([th,td])=>`<tr><th>${th}</th><td>${td}</td></tr>`).join('') +
+        `</tbody></table>`;
+    }
+
+    /* 본문 이미지 (지도/조감도 → 탭하여 확대) */
+    const imgs = (s.images||[]).map(src=>
+      imgTag(src, 'sec-img fade-in', `${cfg.siteName} ${s.ko}`, true)).join('');
+    const hint = (s.images||[]).length ? `<p class="zoom-hint">※ 이미지를 탭하면 크게 볼 수 있습니다</p>` : '';
+
+    /* 특징 카드 */
+    let cards = '';
+    if(s.cards){
+      cards = `<div class="card-grid">` + s.cards.map(c=>
+        `<div class="f-card fade-in">
+           ${c.img ? imgTag(c.img, '', `${esc(c.title)}`) : ''}
+           <div class="f-card-body">
+             ${c.no ? `<span class="f-card-no">PREMIUM ${esc(c.no)}</span>` : ''}
+             <h3 class="f-card-title">${esc(c.title)}</h3>
+             <p class="f-card-desc">${esc(c.desc)}</p>
+           </div>
+         </div>`).join('') + `</div>`;
+    }
+
+    /* 커뮤니티 갤러리 */
+    let gallery = '';
+    if(s.gallery){
+      gallery = `<div class="gal-grid fade-in">` +
+        s.gallery.map(src=>imgTag(src, '', `${cfg.siteName} 커뮤니티`, true)).join('') + `</div>`;
+    }
+
+    /* 탭 (평면안내 / 인테리어) */
+    let tabs = '';
+    if(s.tabs){
+      const btns = s.tabs.map((p,j)=>
+        `<button class="plan-tab${j===0?' active':''}" data-tabgroup="${s.id}" data-idx="${j}">${esc(p.label)}</button>`).join('');
+      const panels = s.tabs.map((p,j)=>{
+        const areaTbl = p.area ? `<table class="info-table area-table"><tbody>` +
+          p.area.map(([k,v])=>`<tr><th>${k}</th><td>${v}</td></tr>`).join('') + `</tbody></table>` : '';
+        return `<div class="plan-panel${j===0?' active':''}" id="${s.id}-panel-${j}">` +
+          p.images.map(src=>imgTag(src, 'sec-img', `${cfg.siteName} ${p.label}`, true)).join('') +
+          areaTbl + `</div>`;
+      }).join('');
+      tabs = `<div class="plan-tabs fade-in">${btns}</div>${panels}
+              <p class="zoom-hint">※ 이미지를 탭하면 크게 볼 수 있습니다</p>`;
+    }
+
+    /* 유의사항 */
+    const notes = s.notes ? `<ul class="notes">` + s.notes.map(n=>`<li>${esc(n)}</li>`).join('') + `</ul>` : '';
+
+    return `<section class="sec${i%2? ' alt':''}" id="${s.id}">
+      <div class="container">
+        <div class="sec-head fade-in">
+          <span class="sec-eyebrow">${s.en}</span>
+          <h2 class="sec-title">${s.ko}</h2>
+          ${s.desc?`<p class="sec-desc">${s.desc}</p>`:''}
+        </div>
+        ${tit}${table}${imgs}${hint}${cards}${gallery}${tabs}${notes}
+      </div>
+    </section>`;
+  }).join('');
+
+  /* 탭 전환 */
+  sec.addEventListener('click', e=>{
+    const t = e.target.closest('.plan-tab'); if(!t) return;
+    const id = t.dataset.tabgroup, idx = t.dataset.idx;
+    document.querySelectorAll(`.plan-tab[data-tabgroup="${id}"]`).forEach(b=>b.classList.remove('active'));
+    document.querySelectorAll(`#${id} .plan-panel`).forEach(p=>p.classList.remove('active'));
+    t.classList.add('active');
+    document.getElementById(`${id}-panel-${idx}`).classList.add('active');
+  });
+
+  /* 이미지 확대(라이트박스) */
+  const lb=document.getElementById('lightbox'), lbImg=document.getElementById('lbImg');
+  sec.addEventListener('click', e=>{
+    const img = e.target.closest('img[data-zoom]'); if(!img) return;
+    lbImg.src = img.src; lbImg.alt = img.alt; lb.classList.add('open');
+    document.body.style.overflow='hidden';
+  });
+  const closeLb=()=>{lb.classList.remove('open');lbImg.src='';document.body.style.overflow='';};
+  lb.addEventListener('click', closeLb);
+  addEventListener('keydown', e=>{ if(e.key==='Escape') closeLb(); });
+
+  /* ── 관심 타입 옵션 ── */
+  const unitSel = document.getElementById('unit_type');
+  cfg.unitTypes.forEach(t=>{ const o=document.createElement('option'); o.value=o.textContent=t; unitSel.appendChild(o); });
+
+  /* ── Form / footer 텍스트 ── */
+  document.getElementById('privacyPurpose').textContent = cfg.privacyPurpose;
+  document.getElementById('successMsg').innerHTML =
+    `빠른 시간 내 담당자가 연락드리겠습니다.<br>추가 문의는 <strong>${cfg.callPhone}</strong>으로 연락 주세요.`;
+  document.getElementById('footerLogo').textContent = cfg.siteName;
+  document.getElementById('footerInfo').innerHTML =
+    `<b>시행·시공</b> ${cfg.developer}<br><b>공급위치</b> ${cfg.address}<br><b>견본주택</b> ${cfg.modelHouse}<br><b>문의</b> <a href="tel:${telNum}">${cfg.callPhone}</a>`;
+  document.getElementById('footerDisclaimer').textContent = cfg.footerDisclaimer;
+  document.getElementById('footerCopy').textContent = `© ${cfg.year} ${cfg.siteName}. All rights reserved.`;
+
+  /* ── 전화 링크 ── */
+  document.getElementById('ctaTel').href = `tel:${telNum}`;
+
+  /* ── 로딩 화면 해제 ── */
+  window.addEventListener('load', ()=>{
+    const l=document.getElementById('page-loading'); if(l){l.classList.add('hide'); setTimeout(()=>l.remove(),450);}
+  });
+  setTimeout(()=>{const l=document.getElementById('page-loading'); if(l){l.classList.add('hide');setTimeout(()=>l.remove(),450);}},1800);
+
+  /* ── Interactions ── */
+  const header=document.getElementById('header');
+  addEventListener('scroll',()=>header.style.background = scrollY>40?'rgba(14,33,21,.98)':'rgba(23,48,31,.96)',{passive:true});
+
+  const mNav=document.getElementById('mobileNav'), ov=document.getElementById('navOverlay');
+  const openNav=()=>{mNav.classList.add('open');ov.classList.add('show');document.body.style.overflow='hidden';};
+  const closeNav=()=>{mNav.classList.remove('open');ov.classList.remove('show');document.body.style.overflow='';};
+  document.getElementById('menuBtn').onclick=openNav;
+  document.getElementById('navClose').onclick=closeNav;
+  ov.onclick=closeNav;
+
+  /* =====================================================================
+     앵커 스크롤 — PC에서 엉뚱한 위치로 이동하던 문제 대응
+     1) 고정 헤더 높이만큼 항상 보정
+     2) 스크롤이 끝날 때까지 목표 좌표를 재계산 → 이미지/폰트가 뒤늦게
+        로딩돼 문서 높이가 변해도 정확한 위치에 안착
+     ===================================================================== */
+  function headerH(){ return header ? header.offsetHeight : 58; }
+  function syncHeaderVar(){ document.documentElement.style.setProperty('--hh', headerH()+'px'); }
+  syncHeaderVar();
+  addEventListener('resize', syncHeaderVar);
+
+  let scrollJob = null;
+  const cancelJob = () => { scrollJob = null; };
+  ['wheel','touchstart','keydown'].forEach(ev=>addEventListener(ev, cancelJob, {passive:true}));
+
+  function targetTop(el){
+    const max = Math.max(0, document.documentElement.scrollHeight - innerHeight);
+    const y = el.getBoundingClientRect().top + pageYOffset - headerH() - 8;
+    return Math.round(Math.min(Math.max(y, 0), max));
+  }
+  function scrollToEl(el, smooth){
+    if(!el) return;
+    const job = scrollJob = {last: targetTop(el)};
+    scrollTo({top: job.last, behavior: smooth ? 'smooth' : 'auto'});
+    const until = performance.now() + 1500;
+    const step = now => {
+      if(scrollJob !== job) return;
+      const t = targetTop(el);
+      if(t !== job.last){ job.last = t; scrollTo({top:t, behavior: smooth?'smooth':'auto'}); }
+      if(now < until) requestAnimationFrame(step);
+    };
+    requestAnimationFrame(step);
+    setTimeout(()=>{
+      if(scrollJob !== job) return;
+      const f = targetTop(el);
+      if(Math.abs(pageYOffset - f) > 2) scrollTo({top:f, behavior:'auto'});
+      cancelJob();
+    }, 1600);
+  }
+  document.addEventListener('click', e=>{
+    const a = e.target.closest('a[href^="#"]');
+    if(!a) return;
+    const hash = a.getAttribute('href');
+    if(hash === '#' || hash.length < 2) return;
+    const el = document.getElementById(hash.slice(1));
+    if(!el) return;
+    e.preventDefault();
+    closeNav();
+    scrollToEl(el, true);
+    history.replaceState(null, '', hash);
+  });
+  function jumpToHash(){
+    if(!location.hash || location.hash.length < 2) return;
+    const el = document.getElementById(location.hash.slice(1));
+    if(el) scrollToEl(el, false);
+  }
+  addEventListener('hashchange', jumpToHash);
+  addEventListener('load', ()=>{ syncHeaderVar(); jumpToHash(); });
+
+  const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible');io.unobserve(e.target);}}),{threshold:.12});
+  document.querySelectorAll('.fade-in').forEach(el=>io.observe(el));
+
+  document.getElementById('privacyToggle').addEventListener('click',()=>{
+    const box=document.getElementById('privacyBox'); const btn=document.getElementById('privacyToggle');
+    const open=box.classList.toggle('open'); btn.textContent=open?'내용닫기 ▴':'내용보기 ▾';
+  });
+  document.getElementById('privacyAgree').addEventListener('change',()=>{document.getElementById('privacyError').style.display='none';});
+
+  /* ── 전송 ── */
+  const form=document.getElementById('contactForm'), formBox=document.getElementById('formBox'),
+        formSuccess=document.getElementById('formSuccess'), submitBtn=document.getElementById('submitBtn');
+  form.addEventListener('submit',async e=>{
+    e.preventDefault();
+    const name=document.getElementById('from_name').value.trim();
+    const phone=document.getElementById('phone').value.trim();
+    if(!name||!phone){alert('성함과 연락처는 필수 입력 항목입니다.');return;}
+    if(!document.getElementById('privacyAgree').checked){
+      const er=document.getElementById('privacyError'); er.style.display='block';
+      er.scrollIntoView({behavior:'smooth',block:'center'}); return;
+    }
+    submitBtn.disabled=true; submitBtn.textContent='전송 중...';
+    try{
+      const res=await fetch('/api/contact',{method:'POST',headers:{'Content-Type':'application/json'},
+        body:JSON.stringify({from_name:name,phone,unit_type:document.getElementById('unit_type').value})});
+      const data=await res.json();
+      if(data.success){ formBox.style.display='none'; formSuccess.style.display='block';
+        formSuccess.scrollIntoView({behavior:'smooth',block:'center'}); }
+      else throw new Error(data.error||'전송 실패');
+    }catch(err){
+      alert(`전송 중 오류가 발생했습니다.\n전화 상담 ${cfg.callPhone}으로 연락 주세요.\n(${err.message})`);
+      submitBtn.disabled=false; submitBtn.textContent='관심고객 등록하기';
+    }
+  });
+})();
+</script>
+</body>
+</html>

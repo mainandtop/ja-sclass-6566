@@ -1,0 +1,13 @@
+{
+  "name": "busan-jangan-jungheung-sclass",
+  "version": "1.0.0",
+  "private": true,
+  "description": "부산 장안지구 중흥S-클래스 모바일 랜딩 페이지",
+  "dependencies": {
+    "nodemailer": "^6.9.9"
+  },
+  "scripts": {
+    "dev": "vercel dev",
+    "start": "vercel dev"
+  }
+}
