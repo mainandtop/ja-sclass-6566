@@ -22,7 +22,7 @@ module.exports = async function handler(req, res) {
 
   let body = req.body;
   if (typeof body === 'string') { try { body = JSON.parse(body); } catch { body = {}; } }
-  const { from_name, phone, unit_type } = body || {};
+  const { from_name, phone, unit_type, visit_date, visit_time } = body || {};
 
   if (!from_name || !phone) {
     return res.status(400).json({ success: false, error: '성함과 연락처는 필수입니다.' });
@@ -43,6 +43,16 @@ module.exports = async function handler(req, res) {
   const now = new Date().toLocaleString('ko-KR', { timeZone: 'Asia/Seoul' });
   const esc = (v) => String(v == null ? '' : v)
     .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+
+  /* 방문예약 일시 — 둘 다 있을 때만 표기 (예: 2026-09-03 + 오전 10:00 → 9월 3일(목) 오전 10:00) */
+  const visitLabel = (() => {
+    if (!visit_date || !visit_time) return '';
+    const m = /^(\d{4})-(\d{2})-(\d{2})$/.exec(String(visit_date).trim());
+    if (!m) return `${visit_date} ${visit_time}`;
+    const d = new Date(Number(m[1]), Number(m[2]) - 1, Number(m[3]));
+    const day = ['일','월','화','수','목','금','토'][d.getDay()];
+    return `${Number(m[2])}월 ${Number(m[3])}일(${day}) ${visit_time}`;
+  })();
 
   const transporter = nodemailer.createTransport({
     service: 'gmail',
@@ -65,9 +75,15 @@ module.exports = async function handler(req, res) {
             <td style="padding:12px 0;color:#17301F;font-weight:700">연락처</td>
             <td style="padding:12px 0"><strong>${esc(phone)}</strong></td>
           </tr>
-          <tr>
+          <tr style="border-bottom:1px solid #f0f0f0">
             <td style="padding:12px 0;color:#17301F;font-weight:700">관심 타입</td>
             <td style="padding:12px 0">${esc(unit_type || '미선택')}</td>
+          </tr>
+          <tr>
+            <td style="padding:12px 0;color:#17301F;font-weight:700">방문예약</td>
+            <td style="padding:12px 0">${visitLabel
+              ? `<strong style="color:#94793F">${esc(visitLabel)}</strong>`
+              : '<span style="color:#999">미신청</span>'}</td>
           </tr>
         </table>
       </div>
@@ -82,7 +98,9 @@ module.exports = async function handler(req, res) {
       await transporter.sendMail({
         from: `"${siteName} 관심등록" <${process.env.EMAIL_USER}>`,
         to: recipient,
-        subject: `[관심등록] ${from_name} / ${phone} — ${siteName}`,
+        subject: visitLabel
+          ? `[방문예약] ${visitLabel} — ${from_name} / ${phone} — ${siteName}`
+          : `[관심등록] ${from_name} / ${phone} — ${siteName}`,
         html,
       });
     }
