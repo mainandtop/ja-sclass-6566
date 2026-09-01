@@ -232,6 +232,12 @@ input[type=date].form-input:invalid,input[type=date].form-input:not(:valid){colo
 .form-success h3{font-size:22px;font-weight:900;color:var(--main);margin-bottom:12px}
 .form-success p{font-size:15px;color:var(--text-s);line-height:1.8}
 
+/* ── 관심고객등록 사은품 안내 ── */
+.gift-note{display:flex;align-items:center;justify-content:center;gap:9px;max-width:560px;margin:16px auto 0;padding:13px 16px;background:#fff;border:1.5px dashed var(--gold);border-radius:var(--radius);font-size:14px;font-weight:700;color:var(--main);line-height:1.55;word-break:keep-all;text-align:center}
+.gift-note .gift-ico{font-size:19px;line-height:1}
+.gift-note b{color:#C0392B}
+.gift-note small{display:block;font-size:12px;font-weight:500;color:var(--text-s);margin-top:3px}
+
 /* ── Footer ── */
 .footer{background:var(--main-d);color:rgba(255,255,255,.45);padding:40px 0 100px}
 .footer-inner{max-width:var(--maxw);margin:0 auto;padding:0 20px}
@@ -257,6 +263,38 @@ input[type=date].form-input:invalid,input[type=date].form-input:not(:valid){colo
 /* ── Scroll fade ── */
 .fade-in{opacity:0;transform:translateY(26px);transition:opacity .7s ease,transform .7s ease}
 .fade-in.visible{opacity:1;transform:none}
+
+/* ── 상단(히어로 하단) 관심고객등록 폼 ── */
+.form-section.form-top{background:#fff;padding:46px 0 50px;border-bottom:1px solid var(--line)}
+.form-section.form-top .form-box{box-shadow:0 10px 32px rgba(23,48,31,.10);border:1px solid var(--line)}
+.form-section.form-top .sec-head{margin-bottom:24px}
+
+/* ── 분양안내 팝업 ── */
+.popup-dim{position:fixed;inset:0;background:rgba(0,0,0,.72);z-index:9600;display:none;align-items:center;justify-content:center;padding:20px;overflow-y:auto}
+.popup-dim.open{display:flex}
+.popup{position:relative;width:100%;max-width:400px;background:#fff;border-radius:14px;overflow:hidden;box-shadow:0 24px 60px rgba(0,0,0,.45);animation:popIn .38s cubic-bezier(.2,.9,.3,1.1)}
+@keyframes popIn{from{opacity:0;transform:translateY(26px) scale(.96)}to{opacity:1;transform:none}}
+.popup-close{position:absolute;top:9px;right:11px;z-index:3;width:32px;height:32px;border-radius:50%;background:rgba(0,0,0,.42);color:#fff;font-size:18px;line-height:1;display:flex;align-items:center;justify-content:center}
+.popup-visual{position:relative;background:var(--main)}
+.popup-visual img{width:100%;aspect-ratio:16/9;object-fit:cover;opacity:.55}
+.popup-visual-txt{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;color:#fff;padding:14px}
+.popup-badge{display:inline-block;font-size:10.5px;letter-spacing:2.5px;font-weight:700;color:var(--main);background:var(--gold);padding:4px 12px;border-radius:20px;margin-bottom:10px}
+.popup-sub{font-size:12.5px;letter-spacing:1px;color:var(--gold-l);margin-bottom:5px}
+.popup-title{font-size:27px;font-weight:900;letter-spacing:3px;text-shadow:0 2px 10px rgba(0,0,0,.6)}
+.popup-body{padding:20px 20px 18px}
+.popup-list li{position:relative;padding:9px 0 9px 26px;font-size:14.5px;color:var(--text);line-height:1.55;border-bottom:1px dashed var(--line);word-break:keep-all}
+.popup-list li:last-child{border-bottom:none}
+.popup-list li b{color:var(--gold-d);font-weight:900}
+.popup-list li::before{content:'';position:absolute;left:6px;top:15px;width:7px;height:7px;border-radius:50%;background:var(--olive)}
+.popup-list li em{font-style:normal;font-size:12px;font-weight:700;color:#fff;background:#C0392B;padding:2px 7px;border-radius:10px;margin-left:5px;vertical-align:1px}
+.popup-note{margin-top:12px;padding:11px 13px;background:var(--cream);border-left:3px solid var(--gold);border-radius:var(--radius);font-size:12.5px;color:var(--text-s);line-height:1.75;word-break:keep-all;white-space:pre-line}
+.popup-cta{display:block;margin-top:15px;padding:15px;background:var(--main);color:#fff;text-align:center;border-radius:var(--radius);font-size:16px;font-weight:700;letter-spacing:.5px}
+.popup-tel{display:block;margin-top:8px;padding:13px;border:1.5px solid var(--main);color:var(--main);text-align:center;border-radius:var(--radius);font-size:15px;font-weight:700}
+.popup-foot{display:flex;align-items:center;justify-content:space-between;border-top:1px solid var(--line);background:var(--gray)}
+.popup-foot button{padding:13px 16px;font-size:13.5px;color:var(--text-s);font-weight:600}
+.popup-foot .popup-today{display:flex;align-items:center;gap:7px}
+.popup-foot .popup-today input{width:16px;height:16px;accent-color:var(--main);cursor:pointer}
+.popup-foot .popup-x{font-weight:700;color:var(--main)}
 
 /* ── Desktop up ── */
 @media(min-width:900px){
@@ -307,7 +345,7 @@ input[type=date].form-input:invalid,input[type=date].form-input:not(:valid){colo
     <p class="hero-sub" id="heroSub"></p>
     <p class="hero-info" id="heroInfo"></p>
     <div class="hero-cta-row">
-      <a href="#register" class="hero-btn hero-btn-primary">관심고객등록</a>
+      <a href="#register-top" class="hero-btn hero-btn-primary">관심고객등록</a>
       <a href="#overview" class="hero-btn hero-btn-outline">사업소개</a>
     </div>
   </div>
@@ -316,6 +354,9 @@ input[type=date].form-input:invalid,input[type=date].form-input:not(:valid){colo
 
 <!-- NOTICE -->
 <div class="notice-bar" id="noticeBar"></div>
+
+<!-- 상단 관심고객등록 폼이 JS로 복제되어 이 자리에 들어갑니다 -->
+<div id="heroFormSlot"></div>
 
 <!-- SECTIONS (config에서 렌더링) -->
 <main id="sections"></main>
@@ -327,53 +368,54 @@ input[type=date].form-input:invalid,input[type=date].form-input:not(:valid){colo
       <span class="sec-eyebrow">INTEREST REGISTRATION</span>
       <h2 class="sec-title">관심고객등록</h2>
       <p class="sec-desc" style="margin-top:14px">등록하신 고객님께 사전 혜택 및 최신 분양정보를 <strong>가장 먼저</strong> 안내해 드립니다.</p>
+      <p class="gift-note"><span class="gift-ico">🎁</span><span>방문예약 후 상담 시 <b>상품권 증정</b><small>선착순 30명 / 5,000원권</small></span></p>
     </div>
-    <div class="form-box fade-in" id="formBox">
-      <form id="contactForm" novalidate>
+    <div class="form-box fade-in js-form-box" id="formBox">
+      <form class="js-form" id="contactForm" novalidate>
         <div class="form-group">
           <label class="form-label" for="from_name">성함 <span>*</span></label>
-          <input class="form-input" type="text" id="from_name" name="from_name" placeholder="홍길동" autocomplete="name" required>
+          <input class="form-input js-name" type="text" id="from_name" name="from_name" placeholder="홍길동" autocomplete="name" required>
         </div>
         <div class="form-group">
           <label class="form-label" for="phone">연락처 <span>*</span></label>
-          <input class="form-input" type="tel" id="phone" name="phone" placeholder="010-0000-0000" autocomplete="tel" inputmode="numeric" required>
+          <input class="form-input js-phone" type="tel" id="phone" name="phone" placeholder="010-0000-0000" autocomplete="tel" inputmode="numeric" required>
         </div>
         <div class="form-group">
           <label class="form-label" for="unit_type">관심 타입</label>
-          <select class="form-select" id="unit_type" name="unit_type"><option value="미선택">타입 선택</option></select>
+          <select class="form-select js-unit" id="unit_type" name="unit_type"><option value="미선택">타입 선택</option></select>
         </div>
         <div class="visit-wrap">
           <div class="visit-head">
             <label class="form-label" for="visit_date">방문예약 (견본주택 상담 희망일시)</label>
-            <button type="button" class="visit-clear" id="visitClear">선택 초기화</button>
+            <button type="button" class="visit-clear js-visit-clear" id="visitClear">선택 초기화</button>
           </div>
-          <div class="visit-quick" id="visitQuick"></div>
+          <div class="visit-quick js-visit-quick" id="visitQuick"></div>
           <div class="form-row">
             <div class="form-group">
-              <input class="form-input" type="date" id="visit_date" name="visit_date" aria-label="방문 희망 날짜">
+              <input class="form-input js-visit-date" type="date" id="visit_date" name="visit_date" aria-label="방문 희망 날짜">
             </div>
             <div class="form-group">
-              <select class="form-select" id="visit_time" name="visit_time" aria-label="방문 희망 시간">
+              <select class="form-select js-visit-time" id="visit_time" name="visit_time" aria-label="방문 희망 시간">
                 <option value="">시간 선택</option>
               </select>
             </div>
           </div>
-          <p class="visit-error" id="visitError">방문 희망 날짜와 시간을 함께 선택해 주세요.</p>
-          <p class="visit-note" id="visitNote"></p>
+          <p class="visit-error js-visit-error" id="visitError">방문 희망 날짜와 시간을 함께 선택해 주세요.</p>
+          <p class="visit-note js-visit-note" id="visitNote"></p>
         </div>
         <div class="privacy-wrap">
           <label class="privacy-row">
-            <input type="checkbox" id="privacyAgree">
+            <input type="checkbox" class="js-privacy-agree" id="privacyAgree">
             <span class="privacy-label"><strong>[필수]</strong> 개인정보 수집·이용에 동의합니다.
-              <button type="button" class="privacy-toggle" id="privacyToggle">내용보기 ▾</button>
+              <button type="button" class="privacy-toggle js-privacy-toggle" id="privacyToggle">내용보기 ▾</button>
             </span>
           </label>
-          <p class="privacy-error" id="privacyError">개인정보 수집·이용에 동의해 주세요.</p>
-          <div class="privacy-box" id="privacyBox">
+          <p class="privacy-error js-privacy-error" id="privacyError">개인정보 수집·이용에 동의해 주세요.</p>
+          <div class="privacy-box js-privacy-box" id="privacyBox">
             <strong>개인정보 수집·이용 안내</strong>
             <table>
               <tr><th>수집 항목</th><td>성명, 연락처, 관심 타입, 방문 희망일시</td></tr>
-              <tr><th>수집 목적</th><td id="privacyPurpose"></td></tr>
+              <tr><th>수집 목적</th><td class="js-privacy-purpose" id="privacyPurpose"></td></tr>
               <tr><th>보유 기간</th><td>수집일로부터 1년 (목적 달성 또는 동의 철회 시 즉시 파기)</td></tr>
               <tr><th>제3자 제공</th><td>제공하지 않음</td></tr>
               <tr><th>담당자</th><td>박천식 부장</td></tr>
@@ -381,14 +423,14 @@ input[type=date].form-input:invalid,input[type=date].form-input:not(:valid){colo
             <p style="margin-top:9px;color:#999">※ 동의를 거부할 권리가 있으나, 거부 시 상담 서비스 제공이 제한됩니다.</p>
           </div>
         </div>
-        <button type="submit" class="form-submit" id="submitBtn">관심고객 등록하기</button>
+        <button type="submit" class="form-submit js-submit" id="submitBtn">관심고객 등록하기</button>
         <p class="form-notice">수집된 개인정보는 분양 상담 안내 목적으로만 사용되며 관련 법령에 따라 보호됩니다.</p>
       </form>
     </div>
-    <div class="form-success" id="formSuccess">
+    <div class="form-success js-form-success" id="formSuccess">
       <div class="form-success-icon">✅</div>
       <h3>관심고객등록이 완료되었습니다!</h3>
-      <p id="successMsg"></p>
+      <p class="js-success-msg" id="successMsg"></p>
     </div>
   </div>
 </section>
@@ -414,6 +456,9 @@ input[type=date].form-input:invalid,input[type=date].form-input:not(:valid){colo
     전화걸기
   </a>
 </div>
+
+<!-- 분양안내 팝업 (config.popup 에서 렌더링) -->
+<div class="popup-dim" id="popupDim" role="dialog" aria-modal="true" aria-label="분양안내"></div>
 
 <!-- LIGHTBOX -->
 <div class="lb" id="lightbox"><button class="lb-close" id="lbClose" aria-label="닫기">✕</button><img id="lbImg" alt=""></div>
@@ -595,30 +640,20 @@ input[type=date].form-input:invalid,input[type=date].form-input:not(:valid){colo
   lb.addEventListener('click', closeLb);
   addEventListener('keydown', e=>{ if(e.key==='Escape') closeLb(); });
 
-  /* ── 관심 타입 옵션 ── */
-  const unitSel = document.getElementById('unit_type');
-  cfg.unitTypes.forEach(t=>{ const o=document.createElement('option'); o.value=o.textContent=t; unitSel.appendChild(o); });
-
   /* =====================================================================
-     방문예약 — 날짜 / 시간 선택
-     · 오늘부터 60일 이내만 선택 가능
-     · 시간: cfg.visitHours(있으면) 또는 10:00~17:30 30분 단위
-     · 예약 미선택도 등록 가능(선택 항목) — 단, 날짜/시간 중 하나만 고르면 경고
+     관심고객등록 폼 — 히어로 하단 / 페이지 하단 두 곳에서 동작
+     · 마크업은 #register 하나만 두고 JS로 복제한다(모든 id에 -top 접미사를
+       붙여 중복 id 방지). 동작은 initForm(root)이 root 내부만 조작하므로
+       두 폼이 서로 간섭하지 않는다.
      ===================================================================== */
-  const visitDate = document.getElementById('visit_date'),
-        visitTime = document.getElementById('visit_time'),
-        visitQuick = document.getElementById('visitQuick'),
-        visitError = document.getElementById('visitError');
   const DAY_KO = ['일','월','화','수','목','금','토'];
   const ymd = d => `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`;
 
-  /* 선택 가능 기간 */
+  /* 방문예약 선택 가능 기간 — 오늘부터 60일 */
   const today = new Date(); today.setHours(0,0,0,0);
   const maxDay = new Date(today); maxDay.setDate(maxDay.getDate()+60);
-  visitDate.min = ymd(today);
-  visitDate.max = ymd(maxDay);
 
-  /* 시간 옵션 */
+  /* 시간 옵션: cfg.visitHours(있으면) 또는 10:00~17:30 30분 단위 */
   const slots = (cfg.visitHours && cfg.visitHours.length) ? cfg.visitHours : (()=>{
     const list=[];
     for(let m=10*60; m<=17*60+30; m+=30){
@@ -628,53 +663,133 @@ input[type=date].form-input:invalid,input[type=date].form-input:not(:valid){colo
     }
     return list;
   })();
-  slots.forEach(t=>{ const o=document.createElement('option'); o.value=o.textContent=t; visitTime.appendChild(o); });
 
-  /* 빠른 날짜 선택 칩 (오늘/내일/이번 주말 등 4개) */
+  /* 빠른 날짜 선택 칩 (오늘/내일/모레/글피) */
   const quickDays = [0,1,2,3].map(n=>{
     const d = new Date(today); d.setDate(d.getDate()+n);
     const label = n===0 ? '오늘' : n===1 ? '내일'
       : `${d.getMonth()+1}/${d.getDate()}(${DAY_KO[d.getDay()]})`;
     return {value: ymd(d), label};
   });
-  visitQuick.innerHTML = quickDays.map(q=>
-    `<button type="button" class="visit-chip" data-date="${q.value}">${q.label}</button>`).join('');
 
-  function syncQuick(){
-    visitQuick.querySelectorAll('.visit-chip').forEach(b=>
-      b.classList.toggle('active', b.dataset.date === visitDate.value));
-  }
-  function visitNoteText(){
-    const note = document.getElementById('visitNote');
-    if(visitDate.value && visitTime.value){
-      const d = new Date(visitDate.value+'T00:00:00');
-      note.innerHTML = `선택하신 <strong>${d.getMonth()+1}월 ${d.getDate()}일(${DAY_KO[d.getDay()]}) ${visitTime.value}</strong> 방문 가능 여부를 담당자가 확인 후 연락드립니다.`;
-    }else{
-      note.textContent = `※ 방문예약은 선택 사항입니다. 상담 가능 시간 ${cfg.openHours}`;
+  function initForm(root){
+    const q = s => root.querySelector(s);
+
+    /* 관심 타입 옵션 */
+    const unitSel = q('.js-unit');
+    cfg.unitTypes.forEach(t=>{ const o=document.createElement('option'); o.value=o.textContent=t; unitSel.appendChild(o); });
+
+    /* 방문예약 — 예약 미선택도 등록 가능(선택 항목).
+       단, 날짜/시간 중 하나만 고르면 경고 */
+    const visitDate = q('.js-visit-date'), visitTime = q('.js-visit-time'),
+          visitQuick = q('.js-visit-quick'), visitError = q('.js-visit-error'),
+          visitNote = q('.js-visit-note');
+    visitDate.min = ymd(today);
+    visitDate.max = ymd(maxDay);
+    slots.forEach(t=>{ const o=document.createElement('option'); o.value=o.textContent=t; visitTime.appendChild(o); });
+    visitQuick.innerHTML = quickDays.map(d=>
+      `<button type="button" class="visit-chip" data-date="${d.value}">${d.label}</button>`).join('');
+
+    function syncQuick(){
+      visitQuick.querySelectorAll('.visit-chip').forEach(b=>
+        b.classList.toggle('active', b.dataset.date === visitDate.value));
     }
-  }
-  const clearVisitError = ()=>{ visitError.style.display='none'; };
-  visitQuick.addEventListener('click', e=>{
-    const b = e.target.closest('.visit-chip'); if(!b) return;
-    visitDate.value = (visitDate.value === b.dataset.date) ? '' : b.dataset.date;
-    syncQuick(); visitNoteText(); clearVisitError();
-  });
-  visitDate.addEventListener('change', ()=>{
-    /* 과거 날짜 입력 방어 (수동 입력 시) */
-    if(visitDate.value && visitDate.value < visitDate.min) visitDate.value = visitDate.min;
-    if(visitDate.value && visitDate.value > visitDate.max) visitDate.value = visitDate.max;
-    syncQuick(); visitNoteText(); clearVisitError();
-  });
-  visitTime.addEventListener('change', ()=>{ visitNoteText(); clearVisitError(); });
-  document.getElementById('visitClear').addEventListener('click', ()=>{
-    visitDate.value=''; visitTime.value=''; syncQuick(); visitNoteText(); clearVisitError();
-  });
-  visitNoteText();
+    function visitNoteText(){
+      if(visitDate.value && visitTime.value){
+        const d = new Date(visitDate.value+'T00:00:00');
+        visitNote.innerHTML = `선택하신 <strong>${d.getMonth()+1}월 ${d.getDate()}일(${DAY_KO[d.getDay()]}) ${visitTime.value}</strong> 방문 가능 여부를 담당자가 확인 후 연락드립니다.`;
+      }else{
+        visitNote.textContent = `※ 방문예약은 선택 사항입니다. 상담 가능 시간 ${cfg.openHours}`;
+      }
+    }
+    const clearVisitError = ()=>{ visitError.style.display='none'; };
+    visitQuick.addEventListener('click', e=>{
+      const b = e.target.closest('.visit-chip'); if(!b) return;
+      visitDate.value = (visitDate.value === b.dataset.date) ? '' : b.dataset.date;
+      syncQuick(); visitNoteText(); clearVisitError();
+    });
+    visitDate.addEventListener('change', ()=>{
+      /* 과거 날짜 입력 방어 (수동 입력 시) */
+      if(visitDate.value && visitDate.value < visitDate.min) visitDate.value = visitDate.min;
+      if(visitDate.value && visitDate.value > visitDate.max) visitDate.value = visitDate.max;
+      syncQuick(); visitNoteText(); clearVisitError();
+    });
+    visitTime.addEventListener('change', ()=>{ visitNoteText(); clearVisitError(); });
+    q('.js-visit-clear').addEventListener('click', ()=>{
+      visitDate.value=''; visitTime.value=''; syncQuick(); visitNoteText(); clearVisitError();
+    });
+    visitNoteText();
 
-  /* ── Form / footer 텍스트 ── */
-  document.getElementById('privacyPurpose').textContent = cfg.privacyPurpose;
-  document.getElementById('successMsg').innerHTML =
-    `빠른 시간 내 담당자가 연락드리겠습니다.<br>추가 문의는 <strong>${cfg.callPhone}</strong>으로 연락 주세요.`;
+    /* 개인정보 동의 */
+    q('.js-privacy-purpose').textContent = cfg.privacyPurpose;
+    const pToggle = q('.js-privacy-toggle'), pBox = q('.js-privacy-box'),
+          pAgree  = q('.js-privacy-agree'),  pError = q('.js-privacy-error');
+    pToggle.addEventListener('click', ()=>{
+      const open = pBox.classList.toggle('open');
+      pToggle.textContent = open ? '내용닫기 ▴' : '내용보기 ▾';
+    });
+    pAgree.addEventListener('change', ()=>{ pError.style.display='none'; });
+
+    /* 전송 */
+    const form = q('.js-form'), formBox = q('.js-form-box'),
+          formSuccess = q('.js-form-success'), submitBtn = q('.js-submit'),
+          successMsg = q('.js-success-msg');
+    successMsg.innerHTML =
+      `빠른 시간 내 담당자가 연락드리겠습니다.<br>추가 문의는 <strong>${cfg.callPhone}</strong>으로 연락 주세요.`;
+
+    form.addEventListener('submit', async e=>{
+      e.preventDefault();
+      const name  = q('.js-name').value.trim();
+      const phone = q('.js-phone').value.trim();
+      if(!name||!phone){ alert('성함과 연락처는 필수 입력 항목입니다.'); return; }
+      if((visitDate.value && !visitTime.value) || (!visitDate.value && visitTime.value)){
+        visitError.style.display='block';
+        visitError.scrollIntoView({behavior:'smooth',block:'center'}); return;
+      }
+      if(!pAgree.checked){
+        pError.style.display='block';
+        pError.scrollIntoView({behavior:'smooth',block:'center'}); return;
+      }
+      submitBtn.disabled=true; submitBtn.textContent='전송 중...';
+      try{
+        const res=await fetch('/api/contact',{method:'POST',headers:{'Content-Type':'application/json'},
+          body:JSON.stringify({
+            from_name:name, phone,
+            unit_type:unitSel.value,
+            visit_date:visitDate.value, visit_time:visitTime.value
+          })});
+        const data=await res.json();
+        if(data.success){
+          if(visitDate.value && visitTime.value){
+            const d=new Date(visitDate.value+'T00:00:00');
+            successMsg.innerHTML =
+              `방문 희망일시 <strong>${d.getMonth()+1}월 ${d.getDate()}일(${DAY_KO[d.getDay()]}) ${visitTime.value}</strong><br>` +
+              `예약 확정 여부는 담당자가 확인 후 연락드립니다.<br>추가 문의는 <strong>${cfg.callPhone}</strong>으로 연락 주세요.`;
+          }
+          formBox.style.display='none'; formSuccess.style.display='block';
+          formSuccess.scrollIntoView({behavior:'smooth',block:'center'});
+        }
+        else throw new Error(data.error||'전송 실패');
+      }catch(err){
+        alert(`전송 중 오류가 발생했습니다.\n전화 상담 ${cfg.callPhone}으로 연락 주세요.\n(${err.message})`);
+        submitBtn.disabled=false; submitBtn.textContent='관심고객 등록하기';
+      }
+    });
+  }
+
+  /* 히어로 하단에 폼 복제 후 두 폼 모두 초기화 */
+  const regSec = document.getElementById('register');
+  const topSec = regSec.cloneNode(true);
+  topSec.id = 'register-top';
+  topSec.classList.add('form-top');
+  topSec.querySelectorAll('[id]').forEach(el=>{ el.id = el.id + '-top'; });
+  topSec.querySelectorAll('label[for]').forEach(el=>
+    el.setAttribute('for', el.getAttribute('for') + '-top'));
+  document.getElementById('heroFormSlot').replaceWith(topSec);
+  initForm(topSec);
+  initForm(regSec);
+
+  /* ── Footer 텍스트 ── */
   document.getElementById('footerLogo').textContent = cfg.siteName;
   document.getElementById('footerInfo').innerHTML =
     `<b>시행·시공</b> ${cfg.developer}<br><b>공급위치</b> ${cfg.address}<br><b>견본주택</b> ${cfg.modelHouse}<br><b>문의</b> <a href="tel:${telNum}">${cfg.callPhone}</a>`;
@@ -763,53 +878,64 @@ input[type=date].form-input:invalid,input[type=date].form-input:not(:valid){colo
   const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible');io.unobserve(e.target);}}),{threshold:.12});
   document.querySelectorAll('.fade-in').forEach(el=>io.observe(el));
 
-  document.getElementById('privacyToggle').addEventListener('click',()=>{
-    const box=document.getElementById('privacyBox'); const btn=document.getElementById('privacyToggle');
-    const open=box.classList.toggle('open'); btn.textContent=open?'내용닫기 ▴':'내용보기 ▾';
-  });
-  document.getElementById('privacyAgree').addEventListener('change',()=>{document.getElementById('privacyError').style.display='none';});
+  /* =====================================================================
+     분양안내 팝업
+     · '오늘 하루 보지 않기' 선택 시 localStorage에 날짜를 저장해 당일 재노출 차단
+     · 배경 클릭 / ✕ / ESC 로 닫힘
+     ===================================================================== */
+  (function initPopup(){
+    const p = cfg.popup;
+    if(!p || p.enabled === false) return;
 
-  /* ── 전송 ── */
-  const form=document.getElementById('contactForm'), formBox=document.getElementById('formBox'),
-        formSuccess=document.getElementById('formSuccess'), submitBtn=document.getElementById('submitBtn');
-  form.addEventListener('submit',async e=>{
-    e.preventDefault();
-    const name=document.getElementById('from_name').value.trim();
-    const phone=document.getElementById('phone').value.trim();
-    if(!name||!phone){alert('성함과 연락처는 필수 입력 항목입니다.');return;}
-    /* 방문예약 — 날짜/시간 중 하나만 선택된 경우 안내 */
-    if((visitDate.value && !visitTime.value) || (!visitDate.value && visitTime.value)){
-      visitError.style.display='block';
-      visitError.scrollIntoView({behavior:'smooth',block:'center'}); return;
-    }
-    if(!document.getElementById('privacyAgree').checked){
-      const er=document.getElementById('privacyError'); er.style.display='block';
-      er.scrollIntoView({behavior:'smooth',block:'center'}); return;
-    }
-    submitBtn.disabled=true; submitBtn.textContent='전송 중...';
-    try{
-      const res=await fetch('/api/contact',{method:'POST',headers:{'Content-Type':'application/json'},
-        body:JSON.stringify({
-          from_name:name, phone,
-          unit_type:document.getElementById('unit_type').value,
-          visit_date:visitDate.value, visit_time:visitTime.value
-        })});
-      const data=await res.json();
-      if(data.success){
-        if(visitDate.value && visitTime.value){
-          const d=new Date(visitDate.value+'T00:00:00');
-          document.getElementById('successMsg').innerHTML =
-            `방문 희망일시 <strong>${d.getMonth()+1}월 ${d.getDate()}일(${DAY_KO[d.getDay()]}) ${visitTime.value}</strong><br>` +
-            `예약 확정 여부는 담당자가 확인 후 연락드립니다.<br>추가 문의는 <strong>${cfg.callPhone}</strong>으로 연락 주세요.`;
-        }
-        formBox.style.display='none'; formSuccess.style.display='block';
-        formSuccess.scrollIntoView({behavior:'smooth',block:'center'}); }
-      else throw new Error(data.error||'전송 실패');
-    }catch(err){
-      alert(`전송 중 오류가 발생했습니다.\n전화 상담 ${cfg.callPhone}으로 연락 주세요.\n(${err.message})`);
-      submitBtn.disabled=false; submitBtn.textContent='관심고객 등록하기';
-    }
-  });
+    const KEY = 'popupHideUntil';
+    try{ if(localStorage.getItem(KEY) === ymd(new Date())) return; }catch(e){}
+
+    const dim = document.getElementById('popupDim');
+    const visual = p.image ? `
+        <div class="popup-visual">
+          ${imgTag(p.image, '', `${cfg.siteName} 분양안내`)}
+          <div class="popup-visual-txt">
+            ${p.badge ? `<span class="popup-badge">${esc(p.badge)}</span>` : ''}
+            ${p.sub ? `<span class="popup-sub">${esc(p.sub)}</span>` : ''}
+            <span class="popup-title">${esc(p.title||'분양안내')}</span>
+          </div>
+        </div>` : '';
+
+    dim.innerHTML = `
+      <div class="popup">
+        <button class="popup-close" type="button" aria-label="팝업 닫기">✕</button>
+        ${visual}
+        <div class="popup-body">
+          <ul class="popup-list">${(p.items||[]).map(t=>`<li>${t}</li>`).join('')}</ul>
+          ${p.note ? `<p class="popup-note">${esc(p.note)}</p>` : ''}
+          <a href="${p.ctaHref||'#register-top'}" class="popup-cta">${esc(p.ctaText||'관심고객등록 바로가기')}</a>
+          <a href="tel:${telNum}" class="popup-tel">전화상담 ${cfg.callPhone}</a>
+        </div>
+        <div class="popup-foot">
+          <label class="popup-today"><input type="checkbox" id="popupToday">오늘 하루 보지 않기</label>
+          <button type="button" class="popup-x">닫기</button>
+        </div>
+      </div>`;
+
+    const openPopup = ()=>{ dim.classList.add('open'); document.body.style.overflow='hidden'; };
+    const closePopup = ()=>{
+      if(document.getElementById('popupToday').checked){
+        try{ localStorage.setItem(KEY, ymd(new Date())); }catch(e){}
+      }
+      dim.classList.remove('open'); document.body.style.overflow='';
+    };
+    dim.addEventListener('click', e=>{
+      if(e.target === dim || e.target.closest('.popup-close,.popup-x,.popup-cta,.popup-tel')) closePopup();
+    });
+    addEventListener('keydown', e=>{ if(e.key==='Escape' && dim.classList.contains('open')) closePopup(); });
+
+    /* 로딩 화면(z-index 9999)이 사라진 뒤 노출 */
+    let shown = false;
+    const show = ()=>{ if(shown) return; shown = true; openPopup(); };
+    if(document.readyState === 'complete') setTimeout(show, 400);
+    else addEventListener('load', ()=>setTimeout(show, 600));
+    setTimeout(show, 2600); /* load 이벤트가 늦어도 노출 보장 */
+  })();
 })();
 </script>
 </body>
